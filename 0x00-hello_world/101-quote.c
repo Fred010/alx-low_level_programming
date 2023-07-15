@@ -2,7 +2,7 @@
 /**
  * main - Starting point
  *
- * Return: 1 (Success)
+ * Return:1 (Success)
  */
 int main(void)
 {
