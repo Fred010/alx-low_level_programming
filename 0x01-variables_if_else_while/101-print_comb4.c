@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 /**
  * main - Starting point
  *
@@ -13,7 +15,7 @@ int main(void)
 	{
 		for (m2 = m1 + 1; m2 <= '9'; m2++)
 		{
-			for (m3 = m2 + 1; m2 <= '9'; m3++)
+			for (m3 = m2 + 1; m3 <= '9'; m3++)
 			{
 				if ((m2 != m1) != m3)
 				{
