@@ -16,7 +16,6 @@ void print_alphabet_x10(void)
 		for (alphabet = 0; alphabet < 26; alphabet++)
 		{
 			_putchar(alphabet);
-			alphabet++;
 		}
 		_putchar('\n');
 	}
