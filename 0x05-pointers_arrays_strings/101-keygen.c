@@ -9,8 +9,9 @@
  * Return: Invariably 0
  */
 
-void keygen(int N)
+int main(void)
 {
+	int N = 0;
 	int i = 0;
 	int randomizer = 0;
 
@@ -49,14 +50,3 @@ void keygen(int N)
 		}
 	}
 }
-
-int main()
-{
-	int N = 10;
-  
-	keygen(N);
-
-	return 0;
-}
-
-
