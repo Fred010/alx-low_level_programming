@@ -11,7 +11,7 @@ int _atoi(char *s)
 {
 	int num = 0;
 	unsigned int u_int = 0;
-	int sign = 0;
+	int sign = 1;
 	int index = 0;
 
 	while (s[num])
