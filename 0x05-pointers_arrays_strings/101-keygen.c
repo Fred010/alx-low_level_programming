@@ -9,7 +9,7 @@
  * Return: Invariably 0
  */
 
-void randomPasswordGenerator(int N)
+void keygen(int N)
 {
 	int i = 0;
 	int randomizer = 0;
@@ -39,6 +39,7 @@ void randomPasswordGenerator(int N)
 		else if (randomizer == 3) {
 			password[i] = LETTER[rand() % 26];
 			randomizer = rand() % 4;
+
 			printf("%c", password[i]);
 		}
 		else {
@@ -53,7 +54,7 @@ int main()
 {
 	int N = 10;
   
-	randomPasswordGenerator(N);
+	keygen(N);
 
 	return 0;
 }
