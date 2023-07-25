@@ -11,42 +11,44 @@
 
 int main(void)
 {
-	int N = 0;
-	int i = 0;
-	int randomizer = 0;
+	int index = 0;
+	int sum = 0;
+	int start_half, end_half;
+	char password[84];
 
-	srand((unsigned int)(time(NULL)));
-  
-	char numbers[] = "0123456789";
-	char letter[] = "abcdefghijklmnoqprstuvwyzx";
-	char LETTER[] = "ABCDEFGHIJKLMNOQPRSTUYWVZX";
-	char symbols[] = "!@#$^&*?";
-	char password[N];
+	srand(time(0));
 
-	randomizer = rand() % 4;
+	while (sum < 2772)
+	{
+		password[index] = 33 + rand() % 94;
+		sum += password[index++];
+	}
+	password[index] = '\0';
+	
+	if (sum != 2772)
+	{
+		start_half = (sum - 2772) / 2;
+		end_half = (sum - 2772) / 2;
 
-	for (i = 0; i < N; i++) {
-
-		if (randomizer == 1) {
-			password[i] = numbers[rand() % 10];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
+		if ((sum - 2772) % 2 != 0)
+			start_half++;
+		for (index = 0; password[index]; index++)
+		{
+			if (password[index] >= (33 + start_half))
+			{
+				password[index] -= start_half;
+				break;
+			}
 		}
-		else if (randomizer == 2) {
-			password[i] = symbols[rand() % 8];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
-		}
-		else if (randomizer == 3) {
-			password[i] = LETTER[rand() % 26];
-			randomizer = rand() % 4;
-
-			printf("%c", password[i]);
-		}
-		else {
-			password[i] = letter[rand() % 26];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
+		for (index = 0; password[index]; index++)
+		{
+			if (password[index] >= (33 + end_half))
+			{
+				password[index] -= end_half;
+				break;
+			}
 		}
 	}
+	printf("%s", password);
+	return (0);
 }
