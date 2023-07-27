@@ -3,6 +3,7 @@
 
 /**
  * _strncat - concatenates two strings
+ * using an input of bytes from src
  * @dest: string to be appended to
  * @src: string to append
  * @n: number of bytes from src to dest
