@@ -1,79 +1,62 @@
-#include "main.h"
-
+#include <stdio.h>
+#include <string.h>
 /**
  *rev_string - reverse array
  *@n: integer params
+ *@str: reverse string
  *Return: 0
  */
 
-void rev_string(char *n)
+char *reverse_string(char *str)
 {
-	int i = 0;
-	int j = 0;
-	char temp;
+	int len = strlen(str);
 
-	while (*(n + i) != '\0')
+	for (int i = 0; i < len / 2; i++)
 	{
-		i++;
+		char temp = str[i];
+
+		str[i] = str[len - i - 1];
+		str[len - i - 1] = temp;
 	}
 
-	i--;
-
-	for (j = 0; j < i; j++, i--)
-	{
-		temp = *(n + j);
-		*(n + j) = *(n + i);
-		*(n + i) = temp;
-	}
+	return str;
 }
 
-/**
- *infinite_add - add 2 numbers together
- *@n1: text representation of 1st number to add
- *@n2: text representation of 2nd number to add
- *@r: pointer to buffer
- *@size_r: buffer size
- *Return: pointer to calling function
- */
-
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
-	{
-		int overflow = 0, i = 0, j = 0, digits = 0;
-		int val1 = 0, val2 = 0, temp_tot = 0;
+{
+	int carry = 0;
+	int i = 0, j = 0, k = 0;
 
-		while (*(n1 + i) != '\0')
-			i++;
-		while (*(n2 + j) != '\0')
-			j++;
-		i--;
-		j--;
-		if (j >= size_r || i >= size_r)
-			return (0);
-		while (j >= 0 || i >= 0 || overflow == 1)
+	int len1 = strlen(n1);
+	int len2 = strlen(n2);
+
+	reverse_string(n1);
+	reverse_string(n2);
+
+	while (i < len1 || j < len2 || carry != 0)
+	{
+		int num1 = (i < len1) ? n1[i] - '0' : 0;
+		int num2 = (j < len2) ? n2[j] - '0' : 0;
+		int sum = num1 + num2 + carry;
+
+		carry = sum / 10;
+
+		int digit = sum % 10;
+
+		if (k < size_r - 1)
 		{
-			if (i < 0)
-				val1 = 0;
-			else
-				val1 = *(n1 + i) - '0';
-			if (j < 0)
-				val2 = 0;
-			else
-				val2 = *(n2 + j) - '0';
-			temp_tot = val1 + val2 + overflow;
-			if (temp_tot >= 10)
-				overflow = 1;
-			else
-				overflow = 0;
-			if (digits >= (size_r - 1))
-				return (0);
-			*(r + digits) = (temp_tot % 10) + '0';
-			digits++;
-			j--;
-			i--;
+			r[k++] = digit + '0';
 		}
-		if (digits == size_r)
-			return (0);
-		*(r + digits) = '\0';
-		rev_string(r);
-		return (r);
+		else
+		{
+			return 0;
+		}
+
+		i++;
+		j++;
 	}
+	r[k] = '\0';
+	reverse_string(r);
+
+	return r;
+}
