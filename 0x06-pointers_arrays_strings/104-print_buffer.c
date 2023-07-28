@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include "main.h"
-#include <ctype.h>
-
 /**
  * print_buffer - prints a buffer
  * @b: points the buffer
  * @size: content in bytes
- *
  * Return: hexadecimal representation and the ASCII characters
  */
 
@@ -15,13 +12,11 @@ void print_buffer(char *b, int size)
 	int m1, j, i;
 
 	m1 = 0;
-
-	if (size <= m1)
+	if (size <= 0)
 	{
 		printf("\n");
 		return;
 	}
-
 	while (m1 < size)
 	{
 		j = size - m1 < 10 ? size - m1 : 10;
@@ -37,19 +32,16 @@ void print_buffer(char *b, int size)
 				printf(" ");
 			}
 		}
-
 		for (i = 0; i < j; i++)
 		{
-			int k = *(b + m1 + i);
+			int c_run = *(b + m1 + i);
 
-			if (k < 32 || k > 132)
+			if (c_run < 32 || c_run > 132)
 			{
-				k = '.';
+				c_run = '.';
 			}
-
-			printf("%c", k);
+			printf("%c", c_run);
 		}
-
 		printf("\n");
 		m1 += 10;
 	}
