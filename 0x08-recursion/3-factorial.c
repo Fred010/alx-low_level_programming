@@ -18,15 +18,5 @@ int factorial(int n)
 	{
 		return (1);
 	}
-	else
-	{
-		int j;
-		int result = 1;
-
-		for (j = 1; j <= n; j++)
-		{
-			result *= j;
-		}
-		return (result);
-	}
+	return (n * factorial(n - 1));
 }
