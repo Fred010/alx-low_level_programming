@@ -30,10 +30,10 @@ char *_strdup(char *str)
 
 	while (loc < index)
 	{
-		string_dup[index] = str[index];
+		string_dup[loc] = str[loc];
 		loc++;
 	}
 
-	string_dup[index] = '\0';
+	string_dup[loc] = '\0';
 	return (string_dup);
 }
