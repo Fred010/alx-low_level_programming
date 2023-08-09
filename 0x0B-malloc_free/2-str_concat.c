@@ -33,7 +33,7 @@ char *str_concat(char *s1, char *s2)
 	if (result == NULL)
 		return (NULL);
 
-	id3 = 0;
+	id2 = 0;
 
 	while (id3 < id4)
 	{
