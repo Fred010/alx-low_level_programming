@@ -13,8 +13,7 @@
 
 char *str_concat(char *s1, char *s2)
 {
-	size_t len1 = strlen(s1);
-	size_t len2 = strlen(s2);
+	int id1 = 0, id2 = 0, id3 = 0, id4 = 0;
 	char *result;
 
 	if (s1 == NULL)
@@ -22,11 +21,32 @@ char *str_concat(char *s1, char *s2)
 	if (s2 == NULL)
 		s2 = "";
 
-	result = (char *) malloc(len1 + len2 + 1);
+	while (s1[id1])
+		id1++;
+	while (s2[id2])
+		id2++;
+
+	id4 = id1 + id2;
+
+	result = malloc((sizeof(char) * id4) + 1);
 
 	if (result == NULL)
 		return (NULL);
-	strcpy(result, s1);
-	strcat(result, s2);
+
+	id3 = 0;
+
+	while (id3 < id4)
+	{
+		if (id3 <= id1)
+			result[id3] = s1[id3];
+
+		if (id3 >= id1)
+		{
+			result[id3] = s2[id2];
+			id2++;
+		}
+		id3++;
+	}
+	result[id3] = '\0';
 	return (result);
 }
