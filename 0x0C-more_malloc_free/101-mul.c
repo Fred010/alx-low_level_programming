@@ -2,170 +2,56 @@
 #include <stdlib.h>
 #include "main.h"
 
-int length_loc(char *str);
-char *_generate_array(int size);
-char *_repeat_zeroes(char *str);
-int _get_num(char c);
-void _product(char *prod, char *mult, int num, int zeroes);
-void _sum_nums(char *end_prod, char *nxt_prod, int new_len);
+/**
+ * find_num - checks for non digit character
+ * in a string
+ * @str: string
+ *
+ * Return: 0 if non digit and 1 if otherwise
+ */
+
+int find_num(char *str)
+{
+	int id = 0;
+
+	while (str[id])
+	{
+		if (str[id] < '0' || str[id] > '9')
+		{
+			return (0);
+		}
+		id++;
+	}
+	return (1);
+}
 
 /**
- * length_loc - finds length of string
+ * _str_scope - finds and outputs the length of string
  * @str: string
  *
  * Return: string length
  */
 
-int length_loc(char *str)
+int _str_scope(char *str)
 {
-	int str_len = 0;
+	int id = 0;
 
-	while (*str++)
-		str_len++;
-
-	return (str_len);
+	while (str[id] != '\0')
+	{
+		id++;
+	}
+	return (id);
 }
 
 /**
- * _generate_array - create character array and initialize
- * @size: size of array
- *
- * Return: points to array
+ * _errata - controls errors
+ * in the main function
  */
 
-char *_generate_array(int size)
+void _errata(void)
 {
-	int mark;
-	char *arr;
-
-	arr = malloc(sizeof(char) * size);
-
-	if (arr == NULL)
-		exit(98);
-	for (mark = 0; mark < (size - 1); mark++)
-		arr[mark] = 'x';
-	arr[mark] = '\0';
-	return (arr);
-}
-
-/**
- * _repeat_zeroes - iterates through string of leading zeroes
- * until it encounters non zeroe element
- * @str: string
- *
- * Return: points to non zero element
- */
-
-char *_repeat_zeroes(char *str)
-{
-	while (*str && *str == '0')
-		str++;
-	return (str);
-}
-
-/**
- * _get_num - change characters to int
- * @c: character
- *
- * Return: int
- */
-
-int _get_num(char c)
-{
-	int num = c - '0';
-
-	if (num < 0 || num > 9)
-	{
-		printf("Error\n");
-		exit(98);
-	}
-	return (num);
-}
-
-/**
- * _prooduct - multiples string by number
- * @prod: placeholder for result
- * @mult: string of numbers
- * @num: single digit
- * @zeroes: leading zeroes
- *
- * Return: void
- */
-
-void _product(char *prod, char *mult, int num, int zeroes)
-{
-	int len_mult, n_num, n_tens = 0;
-
-	len_mult = length_loc(mult) - 1;
-	mult += len_mult;
-
-	while (*prod)
-	{
-		*prod = 'x';
-		prod++;
-	}
-	prod--;
-
-	while (zeroes--)
-	{
-		*prod = '0';
-		prod--;
-	}
-
-	for (; len_mult >= 0; len_mult--, mult--, prod--)
-	{
-		if (*mult < '0' || *mult > '9')
-		{
-			printf("Error\n");
-			exit(98);
-		}
-		n_num = (*mult - '0') * num;
-		n_num += n_tens;
-		*prod = (n_num % 10) + '0';
-		n_tens = n_num / 10;
-	}
-	if (n_tens)
-		*prod = (n_tens % 10) + '0';
-}
-
-/**
- * _sum_nums - add numbers stored in two strings
- * @end_prod: final product
- * @nxt_prod: next product to be added
- * @new_len: next length of next product
- *
- * Return: void
- */
-
-void _sum_nums(char *end_prod, char *nxt_prod, int new_len)
-{
-	int n_num, n_tens = 0;
-
-	while (*(end_prod + 1))
-		end_prod++;
-	while (*(nxt_prod + 1))
-		nxt_prod++;
-	for (; *end_prod != 'x'; end_prod--)
-	{
-		n_num = (*end_prod - '0') + (*nxt_prod - '0');
-		n_num += n_tens;
-		*end_prod = (n_num % 10) + '0';
-		n_tens = n_num / 10;
-		nxt_prod--;
-		new_len--;
-	}
-
-	for (; new_len >= 0 && *nxt_prod != 'x'; new_len--)
-	{
-		n_num = (*nxt_prod - '0');
-		n_num += n_tens;
-		*end_prod = (n_num % 10) + '0';
-		n_tens = n_num / 10;
-		end_prod--;
-		nxt_prod--;
-	}
-	if (n_tens)
-		*end_prod = (n_tens % 10) + '0';
+	printf("Error\n");
+	exit(98);
 }
 
 /**
@@ -178,44 +64,51 @@ void _sum_nums(char *end_prod, char *nxt_prod, int new_len)
 
 int main(int argc, char *argv[])
 {
-	int size, mark, num, zeroes = 0;
-	char *end_prod, *nxt_prod;
+	int len1, len2, n_len, num1, num2, id, fetch, *result;
+	int loc = 0;
+	char *str1, *str2;
 
-	if (argc != 3)
+	str1 = argv[1];
+	str2 = argv[2];
+
+	if (argc != 3 || !find_num(str1) || find_num(str2))
+		_errata();
+
+	len1 = _str_scope(str1);
+	len2 = _str_scope(str2);
+	n_len = len1 + len2 + 1;
+
+	result = malloc(sizeof(int) * n_len);
+
+	if (!result)
+		return (1);
+
+	for (id = 0; id <= len1 + len2; id++)
+		result[id] = 0;
+	for (len1 = len1 - 1; len1 >= 0; len1--)
 	{
-		printf("Error\n");
-		exit(98);
+		num1 = str1[len1] - '0';
+		fetch = 0;
+		for (len2 = _str_scope(str2) - 1; len2 >= 0; len2--)
+		{
+			num2 = str2[len2] - '0';
+			fetch += result[len1 + len2 + 1] + (num1 * num2);
+			result[len1 + len2 + 1] = fetch % 10;
+			fetch /= 10;
+		}
+		if (fetch > 0)
+			result[len1 + len2 + 1] += fetch;
 	}
-
-	if (*(argv[1]) == '0')
-		argv[1] = _repeat_zeroes(argv[1]);
-	if (*(argv[2]) == '0')
-		argv[1] = _repeat_zeroes(argv[1]);
-	if (*(argv[1]) == '\0' || *(argv[2]) == '\0')
+	for (id = 0; id < n_len - 1; id++)
 	{
-		printf("0\n");
-		return (0);
+		if (result[id])
+			loc = 1;
+		if (loc)
+			_putchar(result[id] + '0');
 	}
-
-	size = length_loc(argv[1]) + length_loc(argv[2]);
-	end_prod = _generate_array(size + 1);
-	nxt_prod = _generate_array(size + 1);
-
-	for (mark = length_loc(argv[2]) - 1; mark >= 0; mark--)
-	{
-		num = _get_num(*(argv[2] + mark));
-		_product(nxt_prod, argv[1], num, zeroes++);
-		_sum_nums(end_prod, nxt_prod, size - 1);
-	}
-	for (mark = 0; end_prod[mark]; mark++)
-	{
-		if (end_prod[mark] != 'x')
-			putchar(end_prod[mark]);
-	}
-	putchar('\n');
-
-	free(nxt_prod);
-	free(end_prod);
-
+	if (!loc)
+		_putchar('0');
+	_putchar('\n');
+	free(result);
 	return (0);
 }
