@@ -10,11 +10,8 @@
 
 int sum_them_all(const unsigned int n, ...)
 {
-	int num_sum, id;
+	int num_sum = 0, id = n;
 	va_list ap;
-
-	num_sum = 0;
-	id = n;
 
 	if (!n)
 		return (0);
