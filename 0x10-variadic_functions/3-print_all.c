@@ -50,18 +50,17 @@ void format_string(char *separator, va_list ap)
 }
 
 /**
- * sum_print - prints all
+ * print_all - prints everything
  * @format: format of the string
  */
 
-void sum_print(const char * const format, ...)
+void print_all(const char * const format, ...)
 {
 	char *separator = "";
-	int id1, id2;
+	int id1 = 0, id2;
 	va_list ap;
 
-	id1 = 0;
-	_token_t tokens[] = {
+	token_t tokens[] = {
 		{"c", format_char},
 		{"d", format_int},
 		{"f", format_float},
@@ -74,9 +73,9 @@ void sum_print(const char * const format, ...)
 	while (format && format[id1])
 	{
 		id2 = 0;
-		while (tokens[id2]._token)
+		while (tokens[id2].token)
 		{
-			if (format[id1] == tokens[id2]._token[0])
+			if (format[id1] == tokens[id2].token[0])
 			{
 				tokens[id2].f(separator, ap);
 				separator = ", ";

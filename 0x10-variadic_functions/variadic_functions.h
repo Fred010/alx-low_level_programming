@@ -10,11 +10,11 @@
  * @f: associated function
  */
 
-typedef struct _token
+typedef struct token
 {
-	char *_token;
+	char *token;
 	void (*f)(char *, va_list);
-} _token_t;
+} token_t;
 
 int sum_them_all(const unsigned int n, ...);
 void print_numbers(const char *separator, const unsigned int n, ...);
