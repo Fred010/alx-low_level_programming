@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 
 	while ((byte = read(pre_filde, buff, READ_BUFF_SIZE)) > 0)
 	{
-		if (write(pre_filde, buff, byte) != byte)
+		if (write(post_filde, buff, byte) != byte)
 			dprintf(STDERR_FILENO, ERR_NOWRITE, argv[2]), exit(99);
 	}
 	if (byte == -1)
