@@ -1,6 +1,6 @@
 #include "main.h"
 
-#define USAGE "Usage: cp file_from file_to\n"
+#define USAGE "Usage: cp pre_filde post_filde\n"
 #define ERR_NOREAD "Error: Cannot read from file %s\n"
 #define ERR_NOWRITE "Error: Cannot write to %s\n"
 #define ERR_NOCLOSE "Error: Cannot close filde %d\n"
