@@ -15,7 +15,7 @@ def island_perimeter(grid):
     height, width = len(grid), len(grid[0])
     perimeter = 0
     edges = 0
-    land_cells
+    land_cells = 0
 
     for id1 in range(height):
         for id2 in range(width):
